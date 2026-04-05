@@ -1,0 +1,11 @@
+{
+  "TestPluginOcyss": {
+      "name": "自用测试插件",
+      "description": "Ocyss自用",
+      "labels": "工具",
+      "version": "0.0.1",
+      "icon": "icon.jpg",
+      "author": "ocyss",
+      "level": 0
+  }
+}
