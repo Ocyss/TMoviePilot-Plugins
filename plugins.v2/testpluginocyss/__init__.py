@@ -30,6 +30,7 @@ class TestPluginOcyss(_PluginBase):
 
     def init_plugin(self, config: dict | None = None):
         if config:
+            from app.helper.sites import SitesHelper
             from app.utils import PluginManager
 
             self._enabled = config.get("enabled")
@@ -41,11 +42,13 @@ class TestPluginOcyss(_PluginBase):
                 PluginManager._PluginManager__set_and_check_auth_level = (
                     lambda *args, **kwargs: True
                 )
-            elif self._old_set_and_check_auth_level:
-                PluginManager._PluginManager__set_and_check_auth_level = (
-                    self._old_set_and_check_auth_level
-                )
-                self._old_set_and_check_auth_level = None
+                type(SitesHelper).auth_level = property(lambda self: 999)
+            else:
+                if self._old_set_and_check_auth_level:
+                    PluginManager._PluginManager__set_and_check_auth_level = (
+                        self._old_set_and_check_auth_level
+                    )
+                    self._old_set_and_check_auth_level = None
 
     def get_api(self) -> List[Dict[str, Any]]:
         return []
@@ -89,3 +92,6 @@ class TestPluginOcyss(_PluginBase):
 
     def stop_service(self):
         pass
+
+    def get_state(self) -> bool:
+        return self._enabled or False
