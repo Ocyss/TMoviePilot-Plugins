@@ -11,7 +11,7 @@ class TestPluginOcyss(_PluginBase):
     # 插件图标
     plugin_icon = "https://raw.githubusercontent.com/ocyss/TMoviePilot-Plugins/main/icons/icon.jpg"
     # 插件版本
-    plugin_version = "0.0.2"
+    plugin_version = "0.0.4"
     # 插件作者
     plugin_author = "ocyss"
     # 作者主页
@@ -30,8 +30,8 @@ class TestPluginOcyss(_PluginBase):
 
     def init_plugin(self, config: dict | None = None):
         if config:
+            from app.core.plugin import PluginManager
             from app.helper.sites import SitesHelper
-            from app.utils import PluginManager
 
             self._enabled = config.get("enabled")
 
